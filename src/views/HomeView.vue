@@ -1,8 +1,30 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, type Ref } from "vue";
+
+type Category = "personal" | "business" | "";
+
+interface ITodo {
+  content: string;
+  category: Category;
+  done: Boolean;
+}
 
 const name = ref("");
-const input_category = ref(null);
+const todo_category: Ref<Category> = ref("");
+const todo_name: Ref<string> = ref("");
+const todos: Ref<ITodo[]> = ref([]);
+
+function addTodo() {
+  todos.value.push({
+    content: todo_name.value,
+    category: todo_category.value,
+    done: false,
+  });
+  todo_name.value = "";
+  todo_category.value = "";
+}
+const myMethod = () => {};
+
 watch(name, (newVal) => {
   localStorage.setItem("name", newVal);
 });
@@ -21,24 +43,30 @@ onMounted(() => {
     </section>
     <section class="create-todo">
       <h3>CREATE A TODO</h3>
-      <form>
+      <form @submit="addTodo" @submit.prevent="myMethod">
         <h4>What's on in your todo list?</h4>
-        <input type="text" placeholder="e.g. make a video" />
+        <input
+          type="text"
+          placeholder="e.g. make a video"
+          v-model="todo_name"
+        />
         <h4>Pick your category</h4>
         <div class="options">
           <label>
-            <input type="radio" value="personal" v-model="input_category" />
+            <input type="radio" value="personal" v-model="todo_category" />
             <span class="bubble personal"></span>
             <div>personal</div>
           </label>
 
           <label>
-            <input type="radio" value="business" v-model="input_category" />
+            <input type="radio" value="business" v-model="todo_category" />
             <span class="bubble business"></span>
             <div>business</div>
           </label>
         </div>
+        <input type="submit" value="Add todo" />
       </form>
+      {{ todos }}
     </section>
   </main>
 </template>
