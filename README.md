@@ -2,7 +2,7 @@
 
 <div align="center">
   
-  # Todo
+  # ✅ Todo
   
 </div>
 
@@ -14,15 +14,17 @@
 
 </div>
 
- ## :page_with_curl: Description
+ # :page_with_curl: Description
 
 A TodoList project developed for familiarization with VueJs, with typescript.
 
-## Customize configuration
+### 💥 Overview: <a href="https://todo-front-seven.vercel.app/" target="_blank">Todo Deploy</a>
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-## Project Setup
+## 🏁 Running this project
+
+
+### Project Setup
 
 ```sh
 npm install
