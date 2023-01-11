@@ -4,6 +4,7 @@ import { ref, watch, onMounted, type Ref } from "vue";
 type Category = "personal" | "business" | "";
 
 interface ITodo {
+  id: number;
   content: string;
   category: Category;
   done: boolean;
@@ -14,13 +15,20 @@ const todo_category: Ref<Category> = ref("personal");
 const todo_name: Ref<string> = ref("");
 const todos: Ref<ITodo[]> = ref([]);
 
+let id = 0;
 function addTodo() {
   todos.value.push({
+    id,
     content: todo_name.value,
     category: todo_category.value,
     done: false,
   });
+  id++;
   todo_name.value = "";
+}
+
+function Delete(todo: ITodo) {
+  todos.value = todos.value.filter((t) => t.id !== todo.id);
 }
 const Submit = () => {};
 
@@ -72,7 +80,7 @@ onMounted(() => {
       <div class="list">
         <div
           v-for="todo in todos"
-          :key="todo.content"
+          :key="todo.id"
           :class="`todo-item ${todo.done && 'done'}`"
         >
           <label>
@@ -81,6 +89,9 @@ onMounted(() => {
           </label>
           <div class="todo-content">
             {{ todo.content }}
+          </div>
+          <div class="actions">
+            <button @click="Delete(todo)" class="delete">delete</button>
           </div>
         </div>
       </div>
