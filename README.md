@@ -17,6 +17,7 @@
  # :page_with_curl: Description
 
 A TodoList project developed for familiarization with VueJs, with typescript.
+The css was provided by the Tyler Potts channel, which served as the basis for this project.  
 
 ### 💥 Overview: <a href="https://todo-front-seven.vercel.app/" target="_blank">Todo Deploy</a>
 
