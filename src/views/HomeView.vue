@@ -6,7 +6,7 @@ type Category = "personal" | "business" | "";
 interface ITodo {
   content: string;
   category: Category;
-  done: Boolean;
+  done: boolean;
 }
 
 const name = ref("");
@@ -23,7 +23,7 @@ function addTodo() {
   todo_name.value = "";
   todo_category.value = "";
 }
-const myMethod = () => {};
+const Submit = () => {};
 
 watch(name, (newVal) => {
   localStorage.setItem("name", newVal);
@@ -43,7 +43,7 @@ onMounted(() => {
     </section>
     <section class="create-todo">
       <h3>CREATE A TODO</h3>
-      <form @submit="addTodo" @submit.prevent="myMethod">
+      <form @submit="addTodo" @submit.prevent="Submit">
         <h4>What's on in your todo list?</h4>
         <input
           type="text"
@@ -66,7 +66,24 @@ onMounted(() => {
         </div>
         <input type="submit" value="Add todo" />
       </form>
-      {{ todos }}
+    </section>
+    <section class="todo-list">
+      <h3>TODO LIST</h3>
+      <div class="list">
+        <div
+          v-for="todo in todos"
+          :key="todo.content"
+          :class="`todo-item ${todo.done && 'done'}`"
+        >
+          <label>
+            <input type="checkbox" v-model="todo.done" />
+            <span :class="`bubble ${todo.category}`"></span>
+          </label>
+          <div class="todo-content">
+            {{ todo.content }}
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 </template>
