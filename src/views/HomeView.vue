@@ -10,7 +10,7 @@ interface ITodo {
 }
 
 const name = ref("");
-const todo_category: Ref<Category> = ref("");
+const todo_category: Ref<Category> = ref("personal");
 const todo_name: Ref<string> = ref("");
 const todos: Ref<ITodo[]> = ref([]);
 
@@ -21,7 +21,6 @@ function addTodo() {
     done: false,
   });
   todo_name.value = "";
-  todo_category.value = "";
 }
 const Submit = () => {};
 
@@ -48,6 +47,7 @@ onMounted(() => {
         <input
           type="text"
           placeholder="e.g. make a video"
+          required
           v-model="todo_name"
         />
         <h4>Pick your category</h4>
